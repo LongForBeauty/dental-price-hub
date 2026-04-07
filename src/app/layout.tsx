@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   keywords: ['dental cost', 'dental price comparison', 'how much does dental cost', 'dentist prices'],
   robots: { index: true, follow: true },
   verification: {
-    google: 'cG6L-sTPyQwixjfJ5hxu5eJICGr74UvzzCf4-g0wJC4',
+    google: ['cG6L-sTPyQwixjfJ5hxu5eJICGr74UvzzCf4-g0wJC4', 'IdYLOfJV7egkOxYkoXJqXZgkvVJQ6RMWwdxlt9L6Dhw'],
   },
 }
 
