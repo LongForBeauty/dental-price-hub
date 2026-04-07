@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { PROCEDURES, TARGET_CITIES_FULL } from '@/lib/procedures'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dentalpricehub.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dentalpricehub.org'
   const entries: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
   ]

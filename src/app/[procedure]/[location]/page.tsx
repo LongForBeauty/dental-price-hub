@@ -31,7 +31,7 @@ export async function generateMetadata({
   const { proc, city } = resolveParams(params)
   if (!proc || !city) return {}
 
-  const title = `${proc.displayName} Cost in ${city.city}, ${city.state} (2025 Prices)`
+  const title = `${proc.displayName} Cost in ${city.city}, ${city.state} (2026 Prices)`
   const description = `How much does a ${proc.displayName.toLowerCase()} cost in ${city.city}? Compare prices from local dentists. Average cost: ${formatPrice(proc.avgNational)}. ${proc.insuranceNote}`
 
   return {
@@ -39,7 +39,7 @@ export async function generateMetadata({
     description,
     openGraph: { title, description, type: 'website' },
     alternates: {
-      canonical: `/${params.procedure}/${params.location}`,
+      canonical: `https://dentalpricehub.org/${params.procedure}/${params.location}`,
     },
   }
 }
