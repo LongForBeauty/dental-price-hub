@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  .prose h2 {
+    @apply text-xl font-bold text-gray-900 mt-8 mb-3;
+  }
+  .prose h3 {
+    @apply text-lg font-semibold text-gray-800 mt-6 mb-2;
+  }
+  .prose p {
+    @apply text-gray-700 leading-relaxed mb-4;
+  }
+  .prose ul {
+    @apply list-disc list-inside space-y-2 mb-4 text-gray-700;
+  }
+  .prose li strong {
+    @apply text-gray-900;
+  }
+}
