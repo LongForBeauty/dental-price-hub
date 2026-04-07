@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description: 'Compare dental procedure costs in your city. Find affordable dentists near you. Free price comparison for implants, crowns, cleanings, and more.',
   keywords: ['dental cost', 'dental price comparison', 'how much does dental cost', 'dentist prices'],
   robots: { index: true, follow: true },
+  verification: {
+    google: 'cG6L-sTPyQwixjfJ5hxu5eJICGr74UvzzCf4-g0wJC4',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
