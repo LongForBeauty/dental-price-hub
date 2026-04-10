@@ -3,8 +3,10 @@ import { notFound } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { PROCEDURES, TARGET_CITIES_FULL, formatPrice } from '@/lib/procedures'
 import LeadForm from '@/components/LeadForm'
+import MiniLeadForm from '@/components/MiniLeadForm'
 import PriceCard from '@/components/PriceCard'
 import ComparisonTable from '@/components/ComparisonTable'
+import StickyQuoteBar from '@/components/StickyQuoteBar'
 
 // ── Static params for all city × procedure combos ────────────────────────────
 export async function generateStaticParams() {
@@ -129,6 +131,16 @@ export default async function PricePage({
         insuranceNote={proc.insuranceNote}
       />
 
+      {/* ── Mini Lead Form (mid-page) ── */}
+      <div className="my-6">
+        <MiniLeadForm
+          procedureSlug={proc.slug}
+          procedureName={proc.displayName}
+          city={city.city}
+          state={city.state}
+        />
+      </div>
+
       {/* ── Article Content ── */}
       <article className="prose prose-lg max-w-none my-8">
         <h2>What Affects {proc.displayName} Cost in {city.city}?</h2>
@@ -180,8 +192,8 @@ export default async function PricePage({
         />
       )}
 
-      {/* ── Lead Capture Form ── */}
-      <section className="mt-10 bg-blue-50 rounded-2xl p-8">
+      {/* ── Lead Capture Form (full) ── */}
+      <section id="lead-form" className="mt-10 bg-blue-50 rounded-2xl p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Get Free Quotes from {city.city} Dentists
         </h2>
@@ -196,6 +208,9 @@ export default async function PricePage({
           state={city.state}
         />
       </section>
+
+      {/* ── Sticky Bottom Bar ── */}
+      <StickyQuoteBar procedureName={proc.displayName} city={city.city} />
 
       {/* ── FAQ Schema ── */}
       <script
