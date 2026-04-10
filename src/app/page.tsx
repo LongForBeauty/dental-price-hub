@@ -1,12 +1,91 @@
 import { Metadata } from 'next'
-import { PROCEDURES, TARGET_CITIES_FULL } from '@/lib/procedures'
+import { PROCEDURES } from '@/lib/procedures'
 
 export const metadata: Metadata = {
   title: 'Dental Cost Guide 2026 – Compare Prices by City | DentalPriceHub',
   description:
-    'Compare dental procedure costs in 20+ US cities. Find the average cost of implants, crowns, root canals, braces, and more. Free dental price quotes near you.',
+    'Compare dental procedure costs in 50+ US cities. Find the average cost of implants, crowns, root canals, braces, and more. Free dental price quotes near you.',
   alternates: { canonical: 'https://dentalpricehub.org' },
 }
+
+// Cities grouped by US region — better UX + geographic SEO semantics
+const CITIES_BY_REGION = [
+  {
+    region: 'Northeast',
+    cities: [
+      { city: 'New York',     state: 'NY' },
+      { city: 'Boston',       state: 'MA' },
+      { city: 'Philadelphia', state: 'PA' },
+      { city: 'Baltimore',    state: 'MD' },
+    ],
+  },
+  {
+    region: 'Southeast',
+    cities: [
+      { city: 'Miami',          state: 'FL' },
+      { city: 'Atlanta',        state: 'GA' },
+      { city: 'Tampa',          state: 'FL' },
+      { city: 'Orlando',        state: 'FL' },
+      { city: 'Jacksonville',   state: 'FL' },
+      { city: 'Charlotte',      state: 'NC' },
+      { city: 'Raleigh',        state: 'NC' },
+      { city: 'Nashville',      state: 'TN' },
+      { city: 'Memphis',        state: 'TN' },
+      { city: 'New Orleans',    state: 'LA' },
+      { city: 'Virginia Beach', state: 'VA' },
+      { city: 'Richmond',       state: 'VA' },
+    ],
+  },
+  {
+    region: 'Midwest',
+    cities: [
+      { city: 'Chicago',      state: 'IL' },
+      { city: 'Minneapolis',  state: 'MN' },
+      { city: 'Columbus',     state: 'OH' },
+      { city: 'Cleveland',    state: 'OH' },
+      { city: 'Indianapolis', state: 'IN' },
+      { city: 'Milwaukee',    state: 'WI' },
+      { city: 'Kansas City',  state: 'MO' },
+      { city: 'Omaha',        state: 'NE' },
+      { city: 'Wichita',      state: 'KS' },
+      { city: 'Louisville',   state: 'KY' },
+    ],
+  },
+  {
+    region: 'South & Southwest',
+    cities: [
+      { city: 'Houston',     state: 'TX' },
+      { city: 'Dallas',      state: 'TX' },
+      { city: 'Austin',      state: 'TX' },
+      { city: 'San Antonio', state: 'TX' },
+      { city: 'Fort Worth',  state: 'TX' },
+      { city: 'Arlington',   state: 'TX' },
+      { city: 'Phoenix',     state: 'AZ' },
+      { city: 'Tucson',      state: 'AZ' },
+      { city: 'Albuquerque', state: 'NM' },
+    ],
+  },
+  {
+    region: 'West',
+    cities: [
+      { city: 'Los Angeles',     state: 'CA' },
+      { city: 'San Francisco',   state: 'CA' },
+      { city: 'San Diego',       state: 'CA' },
+      { city: 'San Jose',        state: 'CA' },
+      { city: 'Sacramento',      state: 'CA' },
+      { city: 'Oakland',         state: 'CA' },
+      { city: 'Long Beach',      state: 'CA' },
+      { city: 'Anaheim',         state: 'CA' },
+      { city: 'Fresno',          state: 'CA' },
+      { city: 'Bakersfield',     state: 'CA' },
+      { city: 'Seattle',         state: 'WA' },
+      { city: 'Portland',        state: 'OR' },
+      { city: 'Las Vegas',       state: 'NV' },
+      { city: 'Denver',          state: 'CO' },
+      { city: 'Colorado Springs',state: 'CO' },
+    ],
+  },
+]
 
 const ALL_PROCEDURES = Object.values(PROCEDURES)
 
@@ -88,58 +167,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* City Links — Top Procedure (Dental Implant) */}
+      {/* City Links — grouped by region */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           Dental Implant Cost by City
         </h2>
-        <p className="text-gray-500 mb-5 text-sm">
-          Implant costs vary by 30–50% between cities. Select yours to see local pricing.
+        <p className="text-gray-500 mb-6 text-sm">
+          Implant costs vary by 30–50% between cities. Select your city to see local pricing and get free quotes.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {TARGET_CITIES_FULL.map(city => {
-            const citySlug = city.city
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^a-z0-9-]/g, '')
-            return (
-              <a
-                key={`${city.city}-${city.state}`}
-                href={`/dental-implant/${citySlug}-${city.state.toLowerCase()}`}
-                className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm hover:border-blue-400 hover:text-blue-700 transition-colors text-center font-medium"
-              >
-                {city.city}, {city.state}
-              </a>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Cross-links: Teeth Cleaning */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Teeth Cleaning Cost by City
-        </h2>
-        <p className="text-gray-500 mb-5 text-sm">
-          Most insurance covers two cleanings per year. Find out the cash price in your city.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {TARGET_CITIES_FULL.slice(0, 12).map(city => {
-            const citySlug = city.city
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^a-z0-9-]/g, '')
-            return (
-              <a
-                key={`cleaning-${city.city}-${city.state}`}
-                href={`/teeth-cleaning-adult/${citySlug}-${city.state.toLowerCase()}`}
-                className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm hover:border-blue-400 hover:text-blue-700 transition-colors text-center font-medium"
-              >
-                {city.city}, {city.state}
-              </a>
-            )
-          })}
-        </div>
+        {CITIES_BY_REGION.map(({ region, cities }) => (
+          <div key={region} className="mb-6">
+            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-1">
+              {region}
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {cities.map(city => {
+                const citySlug = city.city
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^a-z0-9-]/g, '')
+                return (
+                  <a
+                    key={`${city.city}-${city.state}`}
+                    href={`/dental-implant/${citySlug}-${city.state.toLowerCase()}`}
+                    className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm hover:border-blue-400 hover:text-blue-700 transition-colors text-center font-medium"
+                  >
+                    {city.city}, {city.state}
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* Trust signals */}
