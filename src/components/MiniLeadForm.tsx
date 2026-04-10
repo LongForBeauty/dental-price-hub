@@ -10,7 +10,7 @@ interface Props {
 
 export default function MiniLeadForm({ procedureSlug, procedureName, city, state }: Props) {
   const [step, setStep] = useState<'form' | 'submitting' | 'success' | 'error'>('form')
-  const [form, setForm] = useState({ first_name: '', email: '', phone: '', insurance: 'none' })
+  const [form, setForm] = useState({ first_name: '', phone: '', insurance: 'none' })
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -20,10 +20,12 @@ export default function MiniLeadForm({ procedureSlug, procedureName, city, state
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...form,
+          first_name: form.first_name,
           last_name: '',
+          email: '',
+          phone: form.phone,
           zip_code: '',
-          insurance: 'none',
+          insurance: form.insurance,
           city,
           state,
           procedure_slug: procedureSlug,
@@ -66,10 +68,10 @@ export default function MiniLeadForm({ procedureSlug, procedureName, city, state
         />
         <input
           required
-          type="email"
-          placeholder="Email address"
-          value={form.email}
-          onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+          type="tel"
+          placeholder="Phone number"
+          value={form.phone}
+          onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
           className="flex-1 rounded-lg px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white"
         />
         <select
