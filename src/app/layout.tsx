@@ -26,6 +26,14 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-6H0VZBB8CQ');`}
         </Script>
+        {/* Microsoft Clarity — heatmaps + session recordings */}
+        <Script id="clarity">
+          {`(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window,document,"clarity","script","CLARITY_PROJECT_ID");`}
+        </Script>
       </head>
       <body className="min-h-screen bg-gray-50 text-gray-900">
         <header className="bg-white border-b border-gray-200 sticky top-0 z-50">

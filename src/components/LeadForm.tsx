@@ -33,6 +33,16 @@ export default function LeadForm({ procedureSlug, procedureName, city, state }: 
 
       if (res.ok) {
         setStep('success')
+        // Fire GA4 conversion event
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          ;(window as any).gtag('event', 'lead_submitted', {
+            event_category: 'lead',
+            event_label: procedureSlug,
+            procedure: procedureSlug,
+            city: city,
+            state: state,
+          })
+        }
       } else {
         setStep('error')
       }
