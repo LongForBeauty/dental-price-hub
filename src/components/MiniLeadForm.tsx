@@ -10,7 +10,7 @@ interface Props {
 
 export default function MiniLeadForm({ procedureSlug, procedureName, city, state }: Props) {
   const [step, setStep] = useState<'form' | 'submitting' | 'success' | 'error'>('form')
-  const [form, setForm] = useState({ first_name: '', email: '', phone: '' })
+  const [form, setForm] = useState({ first_name: '', email: '', phone: '', insurance: 'none' })
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -72,13 +72,19 @@ export default function MiniLeadForm({ procedureSlug, procedureName, city, state
           onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
           className="flex-1 rounded-lg px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white"
         />
-        <input
-          type="tel"
-          placeholder="Phone (optional)"
-          value={form.phone}
-          onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-          className="flex-1 rounded-lg px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white"
-        />
+        <select
+          value={form.insurance}
+          onChange={e => setForm(f => ({ ...f, insurance: e.target.value }))}
+          className="flex-1 rounded-lg px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white bg-white"
+        >
+          <option value="none">No insurance</option>
+          <option value="delta">Delta Dental</option>
+          <option value="cigna">Cigna</option>
+          <option value="aetna">Aetna</option>
+          <option value="metlife">MetLife</option>
+          <option value="united">United Healthcare</option>
+          <option value="other">Other insurance</option>
+        </select>
         <button
           type="submit"
           disabled={step === 'submitting'}
